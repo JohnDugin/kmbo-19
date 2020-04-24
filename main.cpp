@@ -3,36 +3,16 @@
 
 using namespace std;
 
-void dump(const list& l){
-    for(size_t i = 0; i < l.size(); ++i, cout << " ")
-        cout << l[i];
-}
-
-int main(){
-	
+int main() {
     list l;
-    l.pushBack(1);
-    l.pushFront(0);
-    l.pushBack(2);
-
-    cout << "Stage 1: ";
-    dump(l);
-    cout << endl;
-
-    l.insert(1, 10);
-    cout << "Stage 2: ";
-    dump(l);
-    cout << endl;
-
-    l.pop(1);
-    cout << "Stage 2: ";
-    dump(l);
-    cout << endl;
-
-    l.reverse();
-    cout << "Stage 3: ";
-    dump(l);
-    cout << endl;
+    for (int i = 0; i < 100000; ++i) {
+        l.pushBack(1);
+    }
+    cout << "l is full: " << endl;
+    //list l1(l);
+    cout << "l1 is full: " << endl;
+    //list l2(move(l)); // move семантика
+    cout << "l1 is full: " << endl;
 
     return 0;
 }
