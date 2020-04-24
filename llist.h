@@ -3,7 +3,7 @@
 
 using ValueType = double;
 
-class OneList{
+class list{
     struct Node {
         Node(const ValueType& value, Node* next = nullptr);
         ~Node();
@@ -17,17 +17,17 @@ class OneList{
 
 public:
     ////
-    OneList();
-    OneList(const OneList& copyList);
-    OneList& operator=(const OneList& copyList);
-    OneList& operator+=(const OneList& copyList);
-    ~OneList();
+    list();
+    list(const list& copyList);
+    list& operator=(const list& copyList);
+    list& operator+=(const list& copyList);
+    ~list();
     ////
 
     // доступ к значению элемента по индексу
     ValueType& operator[](const size_t pos) const;
     // доступ к узлу по индексу
-    OneList::Node* getNode(const size_t pos) const;
+    list::Node* getNode(const size_t pos) const;
 
     // вставка элемента по индексу, сначала ищем, куда вставлять (О(n)), потом вставляем (O(1))
     void insert(const size_t pos, const ValueType& value);
