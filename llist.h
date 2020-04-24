@@ -1,29 +1,61 @@
-#ifndef LLIST_H
-#define LLIST_H
+#pragma once
+#include <iostream>
 
-#include <cstddef>
+using ValueType = double;
 
-// Linked list of integers
+class OneList{
+    struct Node {
+        Node(const ValueType& value, Node* next = nullptr);
+        ~Node();
 
-class LList
-{
-	// HERE WILL BE YOUR CODE
+        void insertNext(const ValueType& value);
+        void removeNext();
 
-	public:
+        ValueType value;
+        Node* next;
+    };
 
-	LList();                         // construct new collection
-	~LList();                        // free resources
+public:
+    ////
+    OneList();
+    OneList(const OneList& copyList);
+    OneList& operator=(const OneList& copyList);
+    OneList& operator+=(const OneList& copyList);
+    ~OneList();
+    ////
 
-	void push_back(int val);         // add new value at the end:  [1 2 3 4] -> [1 2 3 4 5]
-	void push_front(int val);        // add new value at the begin [1 2 3 4] -> [5 1 2 3 4]
-	void pop_back(int val);          // remove at the end          [1 2 3 4] -> [1 2 3]
-	void pop_front(int val);         // remove at the front        [1 2 3 4] -> [2 3 4]
-	size_t size() const;             // get actual number of items [1 2 3 4] -> 4
-	int& operator[](size_t idx);     // get rw access ot specific item addressing by idx
-	int  operator[](size_t idx) const; //get read-only access
-	void erase_at(size_t idx);       // remove item at specific position: [1 2 3 4], 2 -> [1 2 4]
-	void insert_at(size_t idx, int val); // insert item at specific position: [1 2 3 4], 1, 5 -> [1 5 2 3 4]
-	void reverse();                  // reverse item sequense: [1 2 3 4] -> [4 3 2 1]
+    // доступ к значению элемента по индексу
+    ValueType& operator[](const size_t pos) const;
+    // доступ к узлу по индексу
+    OneList::Node* getNode(const size_t pos) const;
+
+    // вставка элемента по индексу, сначала ищем, куда вставлять (О(n)), потом вставляем (O(1))
+    void insert(const size_t pos, const ValueType& value);
+    // вставка в конец (О(n))
+    void pushBack(const ValueType& value);
+    // вставка в начало (О(1))
+    void pushFront(const ValueType& value);
+
+
+    //удаление элементов
+    void pop(const size_t pos);
+    void popNode(Node* node);
+    void popFront();
+    void popBack();
+
+
+    long long int findIndex(const ValueType& value) const;
+    Node* findNode(const ValueType& value) const;
+
+
+    void reverse();
+
+
+    size_t size() const;
+
+private:
+    Node*	_head;
+    size_t	_size;
+
+    void forceNodeDelete(Node* node);
 };
-
-#endif //LLIST_H
